@@ -30,6 +30,13 @@ jobs:
       - name: Запустити тести
         run: |
           pytest --html=report.html --self-contained-html
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-report
+          path: report.html
+
   docker:
     runs-on: ubuntu-latest
 
@@ -43,9 +50,3 @@ jobs:
       - name: Run Docker container
         run: |
           docker run myapp
-
-      - name: Upload HTML report
-        uses: actions/upload-artifact@v4
-        with:
-          name: pytest-report
-          path: report.html
